@@ -1,13 +1,15 @@
+package www.ecomerce.com.ecommerce.repositorios;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import bases.proyecto.backend.backengithub.modelos.usuarios;
+import www.ecomerce.com.ecommerce.modelos.usuarios;
 
 @Repository
 public interface usuariosRepositorios extends JpaRepository<usuarios, Long> {
 
-    public boolean existsByCORREOELECTRONICO(String CORREOELECTRONICO);
+    public boolean existsBycorreoElectronico(String correoElectronico);
 
-    public boolean existsByNOMBRECUENTA(String NOMBRECUENTA);
+    public boolean existsBynombreCuenta(String nombreCuenta);
 
 }
