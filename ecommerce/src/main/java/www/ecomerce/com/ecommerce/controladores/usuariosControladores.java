@@ -12,7 +12,7 @@ import www.ecomerce.com.ecommerce.modelos.usuarios;
 import www.ecomerce.com.ecommerce.servicios.usuariosServicios;
 
 @RestController
-@RequestMapping("/api/logeo")
+@RequestMapping("/api")
 public class usuariosControladores {
 
     @Autowired
@@ -24,7 +24,7 @@ public class usuariosControladores {
     public usuarios crearNuevoUsuario(@RequestBody usuarios nvUsuarios) {
 
         if (this.usuariosServicios.validarExistenciaUsuario(nvUsuarios.getCodigoUsuario(),
-                nvUsuarios.getCorreoElectronico(), nvUsuarios.getNombreUsuario())) {
+                nvUsuarios.getCorreoElectronico(), nvUsuarios.getNombre())) {
 
             return this.usuariosServicios.crearNuevoUsuario(nvUsuarios);
         }
@@ -34,9 +34,9 @@ public class usuariosControladores {
     }
 
     @GetMapping("/inicio_sesion")
-    public boolean validarDatosLogeosUsuarios(@RequestParam String nombreUsuario, String contraenia) {
+    public boolean validarDatosLogeosUsuarios(@RequestParam String nombre, String contrasenia) {
 
-        return this.usuariosServicios.validarUsuarioLogeado(nombreUsuario, contraenia);
+        return this.usuariosServicios.validarUsuarioLogeado(nombre, contrasenia);
 
     }
 

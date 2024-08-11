@@ -12,6 +12,7 @@ public class usuariosServicios {
     @Autowired
     private usuariosRepositorios usuariosRepositorios;
 
+    ///////////////////////////////////////////////////////////
     // METODO PARA CREAR UN NUEVO USUARIO
     public usuarios crearNuevoUsuario(usuarios nvUsuario) {
 
@@ -19,15 +20,16 @@ public class usuariosServicios {
 
     }
 
+    ///////////////////////////////////////////////////////////
     // AQUI VALIDAMOS QUE EL USUARIO A CREAR NO EXISTA EN LOS REGISTROS DE LA BASE
     // DE DATOS
 
-    public boolean validarExistenciaUsuario(long codigoUsuario, String correoElectronico, String nombreCuenta) {
+    public boolean validarExistenciaUsuario(long codigoUsuario, String correoElectronico, String nombre) {
 
         if (this.usuariosRepositorios.existsById(codigoUsuario) != true) {
 
             if (this.usuariosRepositorios.existsBycorreoElectronico(correoElectronico) != true
-                    && this.usuariosRepositorios.existsBynombreUsuario(nombreCuenta) != true) {
+                    && this.usuariosRepositorios.existsBynombre(nombre) != true) {
 
                 return true;
 
@@ -39,14 +41,17 @@ public class usuariosServicios {
 
     }
 
-    public boolean validarUsuarioLogeado(String nombreUsuario, String contraenia) {
+    // validamos que los datos con los que el usuariso quiera accesder a una cuenta
+    // sean correctos
+    public boolean validarUsuarioLogeado(String nombre, String contrasenia) {
 
-        if (this.usuariosRepositorios.existsBynombreUsuario(nombreUsuario)
-                && this.usuariosRepositorios.existsBycontrasenia(contraenia)) {
+        if (this.usuariosRepositorios.existsBynombre(nombre)
+                && this.usuariosRepositorios.existsBycontrasenia(contrasenia)) {
             return true;
         }
 
         return false;
 
     }
+
 }
