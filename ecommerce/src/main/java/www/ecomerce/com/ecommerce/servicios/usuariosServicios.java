@@ -15,7 +15,7 @@ public class usuariosServicios {
     // METODO PARA CREAR UN NUEVO USUARIO
     public usuarios crearNuevoUsuario(usuarios nvUsuario) {
 
-    return this.usuariosRepositorios.save(nvUsuario);
+        return this.usuariosRepositorios.save(nvUsuario);
 
     }
 
@@ -26,16 +26,27 @@ public class usuariosServicios {
 
         if (this.usuariosRepositorios.existsById(codigoUsuario) != true) {
 
-             
-           if (this.usuariosRepositorios.existsBycorreoElectronico(correoElectronico) != true && this.usuariosRepositorios.existsBynombreCuenta(nombreCuenta) != true) {
+            if (this.usuariosRepositorios.existsBycorreoElectronico(correoElectronico) != true
+                    && this.usuariosRepositorios.existsBynombreUsuario(nombreCuenta) != true) {
 
                 return true;
 
-           }
+            }
 
         }
 
-        return false ;
+        return false;
+
+    }
+
+    public boolean validarUsuarioLogeado(String nombreUsuario, String contraenia) {
+
+        if (this.usuariosRepositorios.existsBynombreUsuario(nombreUsuario)
+                && this.usuariosRepositorios.existsBycontrasenia(contraenia)) {
+            return true;
+        }
+
+        return false;
 
     }
 }
