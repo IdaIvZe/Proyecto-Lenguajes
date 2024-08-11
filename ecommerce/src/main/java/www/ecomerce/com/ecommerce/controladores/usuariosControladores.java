@@ -26,7 +26,7 @@ public class usuariosControladores {
         if (this.usuariosServicios.validarExistenciaUsuario(nvUsuarios.getCodigoUsuario(),
                 nvUsuarios.getCorreoElectronico(), nvUsuarios.getNombre())) {
 
-            return this.usuariosServicios.crearNuevoUsuario(nvUsuarios);
+            return this.usuariosServicios.crearNuvUsuarioInfoCompleta(nvUsuarios);
         }
 
         return null;

@@ -7,11 +7,15 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -59,11 +63,12 @@ public class usuarios {
      */
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // relacion entre la tbla de usuarios ---- lugares =>(un usuario(cliente y
+    // relacion entre la tbla de usuarios ---- lugares
 
-    // @ManyToOne
-    // @JoinColumn(name = "codigo_lugar", referencedColumnName = "codigo_lugar")
-    // private lugares lugar;
+    @OneToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
+    @JoinColumn(name = "codigolugar", referencedColumnName = "codigolugar")
+    private List<lugares> lugar;
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
