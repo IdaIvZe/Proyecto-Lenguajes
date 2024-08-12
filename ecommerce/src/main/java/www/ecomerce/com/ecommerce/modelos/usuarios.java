@@ -10,12 +10,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -65,16 +67,17 @@ public class usuarios {
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // relacion entre la tbla de usuarios ---- lugares
 
-    @OneToMany(mappedBy = "usuarios", cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "codigolugar", referencedColumnName = "codigolugar")
-    private List<lugares> lugar;
+    private lugares lugares;
+
+    // relacionar de muchos a muchos como tablas intermedia
+    // lista_favoritos_productos_por_usuarios
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "listaproductosfavoritos", joinColumns = @JoinColumn(name = "codigousuario", referencedColumnName = "codigousuario"), inverseJoinColumns = @JoinColumn(name = "codigoproducto", referencedColumnName = "codigoproducto"))
+
+    private List<productos> listaproductos;
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // @OneToMany
-    // @JsonProperty("direccion")
-    // private List<direccionEntregas> direccion;
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

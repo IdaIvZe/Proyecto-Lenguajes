@@ -14,4 +14,6 @@ public interface usuariosRepositorios extends JpaRepository<usuarios, Long> {
 
     public boolean existsBycontrasenia(String contrasenia);
 
+    public usuarios findBynombre(String nombre);
+
 }
